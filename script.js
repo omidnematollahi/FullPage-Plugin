@@ -15,25 +15,25 @@
     var delay = true;
     var keyIndex = opt.index - 1;
     var defaultSpeed = 700;
-    var pageCount = 1
-    var windowH = window.innerHeight
-    var direction = ''
-    var removedIndex = ''
-    var removedPages = {}
+    var pageCount = 1;
+    var windowH = window.innerHeight;
+    var direction = '';
+    var removedIndex = '';
+    var removedPages = {};
     window.slidePage = {
         init: function (option, callback) {
             defaultSpeed = $(opt.pageContainer).css('transition-duration').replace('s', '') * 2000;
-            pageCount = $(opt.pageContainer).length
-            console.log(pageCount)
+            pageCount = $(opt.pageContainer).length;
             $.extend(opt, option);
             initDom(opt);
             initEvent(opt);
-            callback && callback.call(this)
+            callback && callback.call(this);
         },
 
         index: function (index) {
             if (index > 0 && index != keyIndex + 1) {
                 index = parseInt(index) - 1;
+                console.log(index);
                 var endheight = $(".slide").eq(index).children().height();
                 var offset = (endheight - windowH) > 20 ? 1 : 0
                 if (index > keyIndex) {
@@ -57,8 +57,13 @@
             if (keyIndex < pageCount - 1) {
                 console.log(keyIndex)
                 var item = $(opt.pageContainer).eq(keyIndex++)
+                console.log('%c' + item + '', 'color: green');
                 console.log(item);
-                nextPage(item)
+                if (keyIndex > 1 && keyIndex < 4) {
+                    nextPageH(item)
+                }
+                else
+                    nextPage(item)
                 isScroll(item.index() + 2)
                 slideScroll(item.index() + 2)
                 delay = false
@@ -68,7 +73,12 @@
             console.log(keyIndex)
             if (keyIndex > 0) {
                 var item = $(opt.pageContainer).eq(keyIndex--)
-                prevPage(item)
+                if (keyIndex > 1 && keyIndex < 4) {
+                    prevPageH(item)
+                }
+                else {
+                    prevPage(item)
+                }
                 isScroll(item.index())
                 slideScroll(item.index())
                 delay = false
@@ -120,12 +130,14 @@
             item.next().css(css)
         },
         nextSlideH: function (item) {
+            console.log('%c' + item + '', 'color: red');
             var ls = item.attributes[0].nodeValue.split(' ');
+            console.log('%c' + ls + '', 'color: brown');
             var selector = '';
-            for(var i = 0; i < ls.length; i++) {
+            for (var i = 0; i < ls.length; i++) {
                 selector += '.' + ls[i];
             }
-            console.log(selector);
+            console.log('%cnextH Selector: ' + selector + '', 'color: green');
             $(selector).css({ 'transform': 'translate3d(-100%, 0, 0px)', '-webkit-transform': 'translate3d(-100%,0, 0px)' });
             var css = translate_x('0')
             $(selector).next().css(css)
@@ -135,9 +147,15 @@
             item.css(translate_y('100%'))
         },
         prevSlideH: function () {
-            item.children().css({ 'transform': 'translate3d(-100%, 0, 0px)', '-webkit-transform': 'translate3d(-100%,0, 0px)' });
-            var css = translate_x('0')
-            item.children().prev().css(css)
+            var ls = item.attributes[0].nodeValue.split(' ');
+            var selector = '';
+            for (var i = 0; i < ls.length; i++) {
+                selector += '.' + ls[i];
+            }
+            console.log('prevH Selector: ' + selector);
+            $(selector).css({ '-webkit-transform': 'scale(1)', 'transform': 'scale(1)' });
+            var css = translate_x('100%')
+            $(selector).prev().css(css)
         },
         showSlide: function (item) {
             item.css({ '-webkit-transform': 'scale(1)', 'transform': 'scale(1)' });
@@ -173,26 +191,30 @@
     }
     function nextPage(item) {
         direction = 'next'
-        var aa = !item.hasClass('horiz');
-        console.log(item)
-        console.log(aa)
-        if(!item.hasClass('horiz')) {
-            if (item.next().length) {
-                currentItem = item.next();
-                orderStep(item.next(), direction);
-                obj.nextSlideV(item);
-            } else {
-                obj.showSlide(item);
-            }
-            keyindex = $(opt.pageContainer).index(item)
-            opt.before(item.index() + 1, direction, item.index() + 2);
-            pageActive()
-        } 
-        else {
-            currentItem = item;
-            orderStep(item, direction);
+        currentItem = item;
+        if (item.next().length) {
+            currentItem = item.next();
+            orderStep(item.next(), direction);
+            obj.nextSlideV(item);
+        } else {
+            obj.showSlide(item);
+        }
+        keyindex = $(opt.pageContainer).index(item) + $('.slide-h').index(item)
+        console.log('nextV: ' + keyIndex);
+        opt.before(item.index() + 1, direction, item.index() + 2);
+        pageActive()
+
+    }
+
+    function nextPageH(item) {
+        currentItem = item;
+        orderStep(item, direction);
+        console.log('%c' + item[0] + '', 'color: purple');
+        if (item.hasClass('item2')) {
             obj.nextSlideH(item.children()[0]);
-            keyindex = $(opt.pageContainer).index(item) + $('.slide-h').index(item)
+        }
+        else {
+            obj.nextSlideH(item[0]);
         }
     }
     function prevPage(item) {
@@ -207,6 +229,16 @@
         }
         opt.before(item.index() + 1, direction, item.index());
         keyindex = $(opt.pageContainer).index(item)
+        console.log('prevV: ' + keyIndex);
+        pageActive()
+    }
+    function prevPageH(item) {
+        direction = 'prev'
+        currentItem = item.prev();
+        orderStep(item.prev(), direction);
+        obj.prevSlideH(item.prev());
+        keyindex = $(opt.pageContainer).index(item)
+        console.log('prevH: ' + keyIndex);
         pageActive()
     }
     function initDom(opt) {

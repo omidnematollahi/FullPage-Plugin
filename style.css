@@ -185,6 +185,7 @@ html, body {
     top: 50%;
     margin-top: -24px;
     z-index: 9999;
+    cursor: pointer;
 }
 
 .horizon-prev {

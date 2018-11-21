@@ -1,15 +1,15 @@
 (function ($) {
     var page = location.search ? urlToObject(location.search).page : 1;
     var opt = {
-        'index': page,
-        'pageContainer': '.slide',
-        'after': function () { },
-        'before': function () { },
-        'speed': false,
-        'refresh': false,
-        'useWheel': true,
-        'useKeyboard': true,
-        'useAnimation': true,
+        index: page,
+        pageContainer: '.slide',
+        after: function () { },
+        before: function () { },
+        speed: false,
+        refresh: false,
+        useWheel: true,
+        useKeyboard: true,
+        useAnimation: true,
     };
     var after = true;
     var delay = true;
@@ -33,14 +33,21 @@
         index: function (index) {
             if (index > 0 && index != keyIndex + 1) {
                 index = parseInt(index) - 1;
-                console.log(index);
                 var endheight = $(".slide").eq(index).children().height();
                 var offset = (endheight - windowH) > 20 ? 1 : 0
                 if (index > keyIndex) {
                     for (var i = keyIndex; i < index; i++) {
-                        nextPage($(opt.pageContainer).eq(i));
-                        isScroll(i + 2, offset)
-                        slideScroll(i + 2)
+                        console.log($(opt.pageContainer).eq(i).html())
+                        if($(opt.pageContainer).eq(i).hasClass('horiz')) {
+                            moveRight($(opt.pageContainer).eq(i));
+                            isScroll(i + 2, offset)
+                            slideScroll(i + 2)
+                        }
+                        else {
+                            nextPage($(opt.pageContainer).eq(i));
+                            isScroll(i + 2, offset)
+                            slideScroll(i + 2)
+                        }
                     }
                 } else if (index < keyIndex) {
                     for (var i = keyIndex; i >= index + 1; i--) {
@@ -54,28 +61,28 @@
             return keyIndex
         },
         next: function () {
+            // console.log(keyIndex);
             if (keyIndex < pageCount - 1) {
-                console.log(keyIndex)
+                // keyIndex = keyIndex + 1;
                 var item = $(opt.pageContainer).eq(keyIndex++)
-                console.log('%c' + item + '', 'color: green');
-                console.log(item);
-                if (keyIndex > 1 && keyIndex < 4) {
-                    nextPageH(item)
+                if(item.hasClass('horiz')) {
+                    console.log(item.attr('class'));
+                    moveRight(item)
                 }
-                else
+                else {
+                    console.log(item.attr('class'));
                     nextPage(item)
+                }
                 isScroll(item.index() + 2)
                 slideScroll(item.index() + 2)
                 delay = false
             }
         },
         prev: function () {
-            console.log(keyIndex)
             if (keyIndex > 0) {
                 var item = $(opt.pageContainer).eq(keyIndex--)
-                if (keyIndex > 1 && keyIndex < 4) {
-                    prevPageH(item)
-                }
+                if(item.hasClass('horiz'))
+                    moveLeft(item)
                 else {
                     prevPage(item)
                 }
@@ -86,37 +93,6 @@
         },
         fire: function (index) {
             fireAnimate(index)
-        },
-        remove: function (index, callback) {
-            if (!removedIndex.match(index)) {
-                pageCount--
-                if (keyIndex > index) {
-                    keyIndex--
-                }
-                removedIndex = index + ',' + removedIndex
-                removedPages[index] = $(opt.pageContainer).eq(index - 1).remove()
-                callback && callback()
-            }
-        },
-        recover: function (index, callback) {
-            if (removedIndex.match(index)) {
-                removedIndex = removedIndex.replace(index + ',', '');
-                if (index >= pageCount) {
-                    $(opt.pageContainer).eq(pageCount - 1).after(removedPages[index]);
-                } else {
-                    $(opt.pageContainer).eq(index - 1).before(removedPages[index]);
-                }
-                if (keyIndex > index) {
-                    keyIndex++
-                }
-                pageCount++
-                if (direction == 'prev') {
-                    obj.prevSlide(removedPages[index])
-                } else {
-                    obj.prevSlide(removedPages[index])
-                }
-                callback && callback()
-            }
         },
         canNext: true,
         canPrev: true,
@@ -130,32 +106,18 @@
             item.next().css(css)
         },
         nextSlideH: function (item) {
-            console.log('%c' + item + '', 'color: red');
-            var ls = item.attributes[0].nodeValue.split(' ');
-            console.log('%c' + ls + '', 'color: brown');
-            var selector = '';
-            for (var i = 0; i < ls.length; i++) {
-                selector += '.' + ls[i];
-            }
-            console.log('%cnextH Selector: ' + selector + '', 'color: green');
-            $(selector).css({ 'transform': 'translate3d(-100%, 0, 0px)', '-webkit-transform': 'translate3d(-100%,0, 0px)' });
+            item.css({ 'transform': 'translate3d(-100%, 0, 0px)', '-webkit-transform': 'translate3d(-100%,0, 0px)' });
             var css = translate_x('0')
-            $(selector).next().css(css)
+            item.next().css(css)
         },
         prevSlideV: function (item) {
             item.prev().css({ '-webkit-transform': 'scale(1)', 'transform': 'scale(1)' });
             item.css(translate_y('100%'))
         },
-        prevSlideH: function () {
-            var ls = item.attributes[0].nodeValue.split(' ');
-            var selector = '';
-            for (var i = 0; i < ls.length; i++) {
-                selector += '.' + ls[i];
-            }
-            console.log('prevH Selector: ' + selector);
-            $(selector).css({ '-webkit-transform': 'scale(1)', 'transform': 'scale(1)' });
+        prevSlideH: function (item) {
+            item.css({ '-webkit-transform': 'scale(1)', 'transform': 'scale(1)' });
             var css = translate_x('100%')
-            $(selector).prev().css(css)
+            item.prev().css(css)
         },
         showSlide: function (item) {
             item.css({ '-webkit-transform': 'scale(1)', 'transform': 'scale(1)' });
@@ -198,23 +160,42 @@
             obj.nextSlideV(item);
         } else {
             obj.showSlide(item);
+            orderStep(item.next(), direction);
         }
         keyindex = $(opt.pageContainer).index(item) + $('.slide-h').index(item)
-        console.log('nextV: ' + keyIndex);
+        console.log(item.index() + 1);
         opt.before(item.index() + 1, direction, item.index() + 2);
         pageActive()
 
     }
 
-    function nextPageH(item) {
-        currentItem = item;
-        orderStep(item, direction);
-        console.log('%c' + item[0] + '', 'color: purple');
-        if (item.hasClass('item2')) {
-            obj.nextSlideH(item.children()[0]);
+    function moveRight(item) {
+        var isNextt = '';
+        direction = 'next'
+        if(item.hasClass('item2')) {
+            item = item.children()[0];
+            var ls = item.attributes[0].nodeValue.split(' ');
+            // console.log(ls);
+            var selector = '';
+            for (var i = 0; i < ls.length; i++) {
+                selector += '.' + ls[i];
+            }
+            isNextt = $(selector);
         }
         else {
-            obj.nextSlideH(item[0]);
+            isNextt = item.next();
+        }
+        // console.log(item);
+        if (isNextt.length) {
+            currentItem = isNextt;
+            orderStep(isNextt, direction);
+            obj.nextSlideH(isNextt);
+            keyindex = $(opt.pageContainer).index(isNextt) + $('.slide-h').index(isNextt)
+            opt.before(isNextt.index() + 2, direction, isNextt.index() + 3);
+        }
+        else {
+            obj.showSlide(item);
+            orderStep(item, direction);
         }
     }
     function prevPage(item) {
@@ -223,22 +204,38 @@
             currentItem = item.prev();
             orderStep(item.prev(), direction);
             obj.prevSlideV(item);
-            // item.prev().prev().css(translate_y('-100%'));
+            item.prev().prev().css(translate_y('-100%'));
         } else {
             obj.showSlide(item);
         }
         opt.before(item.index() + 1, direction, item.index());
         keyindex = $(opt.pageContainer).index(item)
-        console.log('prevV: ' + keyIndex);
         pageActive()
     }
-    function prevPageH(item) {
+    function moveLeft(item) {
+        var isPrevv = '';
         direction = 'prev'
-        currentItem = item.prev();
-        orderStep(item.prev(), direction);
-        obj.prevSlideH(item.prev());
+        if(item.hasClass('item2')){
+            item = item.children()[0];
+            var ls = item.attributes[0].nodeValue.split(' ');
+            // console.log(ls);
+            var selector = '';
+            for (var i = 0; i < ls.length; i++) {
+                selector += '.' + ls[i];
+            }
+            isPrevv = $(selector);
+        }
+        if (isPrevv.length) {
+            currentItem = isPrevv;
+            orderStep(isPrevv, direction);
+            obj.prevSlideH(isPrevv);
+            isPrevv.prev().prev().css(translate_x('-100%'));
+        }
+        else {
+            obj.showSlide(item);
+        }
         keyindex = $(opt.pageContainer).index(item)
-        console.log('prevH: ' + keyIndex);
+        opt.before(item.index() + 1, direction, item.index());
         pageActive()
     }
     function initDom(opt) {
@@ -258,6 +255,7 @@
         after = true;
         setTimeout(function () {
             delay = delays || delay;
+            console.log(delay)
         }, opt.speed || defaultSpeed)
         var steps = $(dom).find('.step');
         steps.each(function (index, item) {
@@ -333,6 +331,7 @@
         var touchY = 0
         document.getElementById('slidePage-container').addEventListener('touchstart', function (e) {
             touchY = e.touches[0].clientY
+            console.log(touchY);
         })
         document.getElementById('slidePage-container').addEventListener('touchmove', function (e) {
             var offsetY = e.touches[0].clientY - touchY
@@ -342,9 +341,11 @@
         });
         $(opt.pageContainer).on({
             'swipeUp': function () {
+                console.log('ascaskjn')
                 slidePage.canNext && slidePage.next();
             },
             'swipeDown': function () {
+                console.log('ascaskjn');
                 slidePage.canPrev && slidePage.prev();
             }
         });

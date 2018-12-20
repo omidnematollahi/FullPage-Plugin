@@ -1,94 +1,290 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
-    <link rel="stylesheet" href="font-awesome.css">
-    <link rel="stylesheet" type="text/css" href="slick.css">
-    <link rel="stylesheet" type="text/css" href="slick-theme.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="./assets/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+
+    <meta charset="utf-8">
 </head>
 
 <body>
+    <nav class="main_nav">
+        <ul>
+            <li><a class="active" onclick="slidePage.changeHash('item1')" data-id="item1">item 1</a></li>
+            <li><a data-id="item2-1" onclick="slidePage.changeHash('item2-1')">item 2</a></li>
+            <li><a data-id="item3-1" onclick="slidePage.changeHash('item3-1')">item 3</a></li>
+            <li><a data-id="item4" onclick="slidePage.changeHash('item4')">item 4</a></li>
+            <li><a data-id="item5" onclick="slidePage.changeHash('item5')">item 5</a></li>
+            <li><a data-id="item6" onclick="slidePage.changeHash('item6')">item 6</a></li>
+            <li><a data-id="item7" onclick="slidePage.changeHash('item7')">item 7</a></li>
+        </ul>
+    </nav>
     <div class="slidePage-container" id="slidePage-container">
-        <div class="slide item1">a</div>
-        <div class="slide item2 horiz">
-            <div class="slide slide-h item2-1 horiz" id="item2-1">b</div>
-            <div class="slide slide-h item2-2 horiz" id="item2-2">
-                <div class="wrapper">
-                    <div class="responsive">
-                        <div>
-                            <img src="images/101.jpg">
-                            <div>
-                                <h3>asdsa</h3>
-                            </div>
-                        </div>
-                        <div><img src="images/102.jpg">
-                            <div>
-                                <h3>asdsa</h3>
-                            </div>
-                        </div>
-                        <div><img src="images/103.jpg">
-                            <div>
-                                <h3>asdsa</h3>
-                            </div>
-                        </div>
-                        <div><img src="images/105.jpg">
-                            <div>
-                                <h3>asdsa</h3>
-                            </div>
-                        </div>
-                        <div><img src="images/106.jpg">
-                            <div>
-                                <h3>asdsa</h3>
-                            </div>
-                        </div>
-                        <div><img src="images/107.jpg">
-                            <div>
-                                <h3>asdsa</h3>
-                            </div>
-                        </div>
-                        <div><img src="images/108.jpg">
-                            <div>
-                                <h3>asdsa</h3>
-                            </div>
-                        </div>
-                        <div><img src="images/109.jpg">
-                            <div>
-                                <h3>asdsa</h3>
-                            </div>
-                        </div>
-                        <div><img src="images/110.jpg">
-                            <div>
-                                <h3>asdsa</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="slide slide-h item2-3 horiz" id="item2-3">d</div>
-            <!-- <div class="horizon-prev" onclick="slidePage.index()"><img src="images/l-arrow.png"></div> -->
-            <!-- <div class="horizon-next" onclick="slidePage.index()"><img src="images/r-arrow.png"></div> -->
+        <div class="slide item1" data-anchor="item1"><h1>1</h1></div>
+        <div class="slide slide-h item2-1" data-anchor="item2-1" data-horiz="true">
+            <h1>2-1</h1><p style="margin-top: 50px; margin-right: 30px">این متن جهت تست می باشد</p>
         </div>
-        <div class="slide item3">e</div>
-        <div class="slide item4">f</div>
-        <div class="slide item5">g</div>
-        <div class="slide item6">h</div>
+        <div class="slide slide-h item2-2 horiz" data-anchor="item2-2" data-horiz="true">
+            <h1>2-2</h1>
+        </div>
+        <div class="slide slide-h item2-3 horiz" data-anchor="item2-3" id="item2-3" data-horiz="true"><h1>2-3</h1></div>
+
+        <div class="slide slide-h item3-1" data-anchor="item3-1" data-horiz="true"><h1>3-1</h1></div>
+        <div class="slide slide-h item3-2 horiz" data-anchor="item3-2" data-horiz="true"><h1>3-2</h1></div>
+        <div class="slide slide-h item3-3 horiz" data-anchor="item3-3" data-horiz="true"><h1>3-3</h1></div>
+        <div class="slide item4" data-anchor="item4">
+            <div class="" id="">
+                Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of
+                    English to emphasise design elements over content. It's also called placeholder (or filler) text.
+                    It's a convenient tool for mock-ups. It helps to outline the visual elements of a document or
+                    presentation, eg typography, font, or layout. Lorem ipsum is mostly a part of a Latin text by the
+                    classical author and philosopher Cicero. Its words and letters have been changed by addition or
+                    removal, so to deliberately render its content nonsensical; it's not genuine, correct, or
+                    comprehensible Latin anymore. While lorem ipsum's still resembles classical Latin, it actually has
+                    no meaning whatsoever. As Cicero's text doesn't contain the letters K, W, or Z, alien to latin,
+                    these, and others are often inserted randomly to mimic the typographic appearence of European
+                    languages, as are digraphs not to be found in the original.
+
+                    In a professional context it often happens that private or corporate clients corder a publication
+                    to be made and presented with the actual content still not being ready. Think of a news blog that's
+                    filled with content hourly on the day of going live. However, reviewers tend to be distracted by
+                    comprehensible content, say, a random text copied from a newspaper or the internet. The are likely
+                    to focus on the text, disregarding the layout and its elements. Besides, random text risks to be
+                    unintendedly humorous or offensive, an unacceptable risk in corporate environments. Lorem ipsum and
+                    its many variants have been employed since the early 1960ies, and quite likely since the sixteenth
+                    century.Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of
+                    English to emphasise design elements over content. It's also called placeholder (or filler) text.
+                    It's a convenient tool for mock-ups. It helps to outline the visual elements of a document or
+                    presentation, eg typography, font, or layout. Lorem ipsum is mostly a part of a Latin text by the
+                    classical author and philosopher Cicero. Its words and letters have been changed by addition or
+                    removal, so to deliberately render its content nonsensical; it's not genuine, correct, or
+                    comprehensible Latin anymore. While lorem ipsum's still resembles classical Latin, it actually has
+                    no meaning whatsoever. As Cicero's text doesn't contain the letters K, W, or Z, alien to latin,
+                    these, and others are often inserted randomly to mimic the typographic appearence of European
+                    languages, as are digraphs not to be found in the original.
+
+                    In a professional context it often happens that private or corporate clients corder a publication
+                    to be made and presented with the actual content still not being ready. Think of a news blog that's
+                    filled with content hourly on the day of going live. However, reviewers tend to be distracted by
+                    comprehensible content, say, a random text copied from a newspaper or the internet. The are likely
+                    to focus on the text, disregarding the layout and its elements. Besides, random text risks to be
+                    unintendedly humorous or offensive, an unacceptable risk in corporate environments. Lorem ipsum and
+                    its many variants have been employed since the early 1960ies, and quite likely since the sixteenth
+                    century.Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of
+                    English to emphasise design elements over content. It's also called placeholder (or filler) text.
+                    It's a convenient tool for mock-ups. It helps to outline the visual elements of a document or
+                    presentation, eg typography, font, or layout. Lorem ipsum is mostly a part of a Latin text by the
+                    classical author and philosopher Cicero. Its words and letters have been changed by addition or
+                    removal, so to deliberately render its content nonsensical; it's not genuine, correct, or
+                    comprehensible Latin anymore. While lorem ipsum's still resembles classical Latin, it actually has
+                    no meaning whatsoever. As Cicero's text doesn't contain the letters K, W, or Z, alien to latin,
+                    these, and others are often inserted randomly to mimic the typographic appearence of European
+                    languages, as are digraphs not to be found in the original.
+
+                    In a professional context it often happens that private or corporate clients corder a publication
+                    to be made and presented with the actual content still not being ready. Think of a news blog that's
+                    filled with content hourly on the day of going live. However, reviewers tend to be distracted by
+                    comprehensible content, say, a random text copied from a newspaper or the internet. The are likely
+                    to focus on the text, disregarding the layout and its elements. Besides, random text risks to be
+                    unintendedly humorous or offensive, an unacceptable risk in corporate environments. Lorem ipsum and
+                    its many variants have been employed since the early 1960ies, and quite likely since the sixteenth
+                    century.Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of
+                    English to emphasise design elements over content. It's also called placeholder (or filler) text.
+                    It's a convenient tool for mock-ups. It helps to outline the visual elements of a document or
+                    presentation, eg typography, font, or layout. Lorem ipsum is mostly a part of a Latin text by the
+                    classical author and philosopher Cicero. Its words and letters have been changed by addition or
+                    removal, so to deliberately render its content nonsensical; it's not genuine, correct, or
+                    comprehensible Latin anymore. While lorem ipsum's still resembles classical Latin, it actually has
+                    no meaning whatsoever. As Cicero's text doesn't contain the letters K, W, or Z, alien to latin,
+                    these, and others are often inserted randomly to mimic the typographic appearence of European
+                    languages, as are digraphs not to be found in the original.
+
+                    In a professional context it often happens that private or corporate clients corder a publication
+                    to be made and presented with the actual content still not being ready. Think of a news blog that's
+                    filled with content hourly on the day of going live. However, reviewers tend to be distracted by
+                    comprehensible content, say, a random text copied from a newspaper or the internet. The are likely
+                    to focus on the text, disregarding the layout and its elements. Besides, random text risks to be
+                    unintendedly humorous or offensive, an unacceptable risk in corporate environments. Lorem ipsum and
+                    its many variants have been employed since the early 1960ies, and quite likely since the sixteenth
+                    century.Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of
+                    English to emphasise design elements over content. It's also called placeholder (or filler) text.
+                    It's a convenient tool for mock-ups. It helps to outline the visual elements of a document or
+                    presentation, eg typography, font, or layout. Lorem ipsum is mostly a part of a Latin text by the
+                    classical author and philosopher Cicero. Its words and letters have been changed by addition or
+                    removal, so to deliberately render its content nonsensical; it's not genuine, correct, or
+                    comprehensible Latin anymore. While lorem ipsum's still resembles classical Latin, it actually has
+                    no meaning whatsoever. As Cicero's text doesn't contain the letters K, W, or Z, alien to latin,
+                    these, and others are often inserted randomly to mimic the typographic appearence of European
+                    languages, as are digraphs not to be found in the original.
+
+                    In a professional context it often happens that private or corporate clients corder a publication
+                    to be made and presented with the actual content still not being ready. Think of a news blog that's
+                    filled with content hourly on the day of going live. However, reviewers tend to be distracted by
+                    comprehensible content, say, a random text copied from a newspaper or the internet. The are likely
+                    to focus on the text, disregarding the layout and its elements. Besides, random text risks to be
+                    unintendedly humorous or offensive, an unacceptable risk in corporate environments. Lorem ipsum and
+                    its many variants have been employed since the early 1960ies, and quite likely since the sixteenth
+                    century.Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of
+                    English to emphasise design elements over content. It's also called placeholder (or filler) text.
+                    It's a convenient tool for mock-ups. It helps to outline the visual elements of a document or
+                    presentation, eg typography, font, or layout. Lorem ipsum is mostly a part of a Latin text by the
+                    classical author and philosopher Cicero. Its words and letters have been changed by addition or
+                    removal, so to deliberately render its content nonsensical; it's not genuine, correct, or
+                    comprehensible Latin anymore. While lorem ipsum's still resembles classical Latin, it actually has
+                    no meaning whatsoever. As Cicero's text doesn't contain the letters K, W, or Z, alien to latin,
+                    these, and others are often inserted randomly to mimic the typographic appearence of European
+                    languages, as are digraphs not to be found in the original.
+
+                    In a professional context it often happens that private or corporate clients corder a publication
+                    to be made and presented with the actual content still not being ready. Think of a news blog that's
+                    filled with content hourly on the day of going live. However, reviewers tend to be distracted by
+                    comprehensible content, say, a random text copied from a newspaper or the internet. The are likely
+                    to focus on the text, disregarding the layout and its elements. Besides, random text risks to be
+                    unintendedly humorous or offensive, an unacceptable risk in corporate environments. Lorem ipsum and
+                    its many variants have been employed since the early 1960ies, and quite likely since the sixteenth
+                    century.Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of
+                    English to emphasise design elements over content. It's also called placeholder (or filler) text.
+                    It's a convenient tool for mock-ups. It helps to outline the visual elements of a document or
+                    presentation, eg typography, font, or layout. Lorem ipsum is mostly a part of a Latin text by the
+                    classical author and philosopher Cicero. Its words and letters have been changed by addition or
+                    removal, so to deliberately render its content nonsensical; it's not genuine, correct, or
+                    comprehensible Latin anymore. While lorem ipsum's still resembles classical Latin, it actually has
+                    no meaning whatsoever. As Cicero's text doesn't contain the letters K, W, or Z, alien to latin,
+                    these, and others are often inserted randomly to mimic the typographic appearence of European
+                    languages, as are digraphs not to be found in the original.
+
+                    In a professional context it often happens that private or corporate clients corder a publication
+                    to be made and presented with the actual content still not being ready. Think of a news blog that's
+                    filled with content hourly on the day of going live. However, reviewers tend to be distracted by
+                    comprehensible content, say, a random text copied from a newspaper or the internet. The are likely
+                    to focus on the text, disregarding the layout and its elements. Besides, random text risks to be
+                    unintendedly humorous or offensive, an unacceptable risk in corporate environments. Lorem ipsum and
+                    its many variants have been employed since the early 1960ies, and quite likely since the sixteenth
+                    century.Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of
+                    English to emphasise design elements over content. It's also called placeholder (or filler) text.
+                    It's a convenient tool for mock-ups. It helps to outline the visual elements of a document or
+                    presentation, eg typography, font, or layout. Lorem ipsum is mostly a part of a Latin text by the
+                    classical author and philosopher Cicero. Its words and letters have been changed by addition or
+                    removal, so to deliberately render its content nonsensical; it's not genuine, correct, or
+                    comprehensible Latin anymore. While lorem ipsum's still resembles classical Latin, it actually has
+                    no meaning whatsoever. As Cicero's text doesn't contain the letters K, W, or Z, alien to latin,
+                    these, and others are often inserted randomly to mimic the typographic appearence of European
+                    languages, as are digraphs not to be found in the original.
+
+                    In a professional context it often happens that private or corporate clients corder a publication
+                    to be made and presented with the actual content still not being ready. Think of a news blog that's
+                    filled with content hourly on the day of going live. However, reviewers tend to be distracted by
+                    comprehensible content, say, a random text copied from a newspaper or the internet. The are likely
+                    to focus on the text, disregarding the layout and its elements. Besides, random text risks to be
+                    unintendedly humorous or offensive, an unacceptable risk in corporate environments. Lorem ipsum and
+                    its many variants have been employed since the early 1960ies, and quite likely since the sixteenth
+                    century.Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of
+                    English to emphasise design elements over content. It's also called placeholder (or filler) text.
+                    It's a convenient tool for mock-ups. It helps to outline the visual elements of a document or
+                    presentation, eg typography, font, or layout. Lorem ipsum is mostly a part of a Latin text by the
+                    classical author and philosopher Cicero. Its words and letters have been changed by addition or
+                    removal, so to deliberately render its content nonsensical; it's not genuine, correct, or
+                    comprehensible Latin anymore. While lorem ipsum's still resembles classical Latin, it actually has
+                    no meaning whatsoever. As Cicero's text doesn't contain the letters K, W, or Z, alien to latin,
+                    these, and others are often inserted randomly to mimic the typographic appearence of European
+                    languages, as are digraphs not to be found in the original.
+
+                    In a professional context it often happens that private or corporate clients corder a publication
+                    to be made and presented with the actual content still not being ready. Think of a news blog that's
+                    filled with content hourly on the day of going live. However, reviewers tend to be distracted by
+                    comprehensible content, say, a random text copied from a newspaper or the internet. The are likely
+                    to focus on the text, disregarding the layout and its elements. Besides, random text risks to be
+                    unintendedly humorous or offensive, an unacceptable risk in corporate environments. Lorem ipsum and
+                    its many variants have been employed since the early 1960ies, and quite likely since the sixteenth
+                    century.Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of
+                    English to emphasise design elements over content. It's also called placeholder (or filler) text.
+                    It's a convenient tool for mock-ups. It helps to outline the visual elements of a document or
+                    presentation, eg typography, font, or layout. Lorem ipsum is mostly a part of a Latin text by the
+                    classical author and philosopher Cicero. Its words and letters have been changed by addition or
+                    removal, so to deliberately render its content nonsensical; it's not genuine, correct, or
+                    comprehensible Latin anymore. While lorem ipsum's still resembles classical Latin, it actually has
+                    no meaning whatsoever. As Cicero's text doesn't contain the letters K, W, or Z, alien to latin,
+                    these, and others are often inserted randomly to mimic the typographic appearence of European
+                    languages, as are digraphs not to be found in the original.
+
+                    In a professional context it often happens that private or corporate clients corder a publication
+                    to be made and presented with the actual content still not being ready. Think of a news blog that's
+                    filled with content hourly on the day of going live. However, reviewers tend to be distracted by
+                    comprehensible content, say, a random text copied from a newspaper or the internet. The are likely
+                    to focus on the text, disregarding the layout and its elements. Besides, random text risks to be
+                    unintendedly humorous or offensive, an unacceptable risk in corporate environments. Lorem ipsum and
+                    its many variants have been employed since the early 1960ies, and quite likely since the sixteenth
+                    century.Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of
+                    English to emphasise design elements over content. It's also called placeholder (or filler) text.
+                    It's a convenient tool for mock-ups. It helps to outline the visual elements of a document or
+                    presentation, eg typography, font, or layout. Lorem ipsum is mostly a part of a Latin text by the
+                    classical author and philosopher Cicero. Its words and letters have been changed by addition or
+                    removal, so to deliberately render its content nonsensical; it's not genuine, correct, or
+                    comprehensible Latin anymore. While lorem ipsum's still resembles classical Latin, it actually has
+                    no meaning whatsoever. As Cicero's text doesn't contain the letters K, W, or Z, alien to latin,
+                    these, and others are often inserted randomly to mimic the typographic appearence of European
+                    languages, as are digraphs not to be found in the original.
+
+                    In a professional context it often happens that private or corporate clients corder a publication
+                    to be made and presented with the actual content still not being ready. Think of a news blog that's
+                    filled with content hourly on the day of going live. However, reviewers tend to be distracted by
+                    comprehensible content, say, a random text copied from a newspaper or the internet. The are likely
+                    to focus on the text, disregarding the layout and its elements. Besides, random text risks to be
+                    unintendedly humorous or offensive, an unacceptable risk in corporate environments. Lorem ipsum and
+                    its many variants have been employed since the early 1960ies, and quite likely since the sixteenth
+                    century.Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of
+                    English to emphasise design elements over content. It's also called placeholder (or filler) text.
+                    It's a convenient tool for mock-ups. It helps to outline the visual elements of a document or
+                    presentation, eg typography, font, or layout. Lorem ipsum is mostly a part of a Latin text by the
+                    classical author and philosopher Cicero. Its words and letters have been changed by addition or
+                    removal, so to deliberately render its content nonsensical; it's not genuine, correct, or
+                    comprehensible Latin anymore. While lorem ipsum's still resembles classical Latin, it actually has
+                    no meaning whatsoever. As Cicero's text doesn't contain the letters K, W, or Z, alien to latin,
+                    these, and others are often inserted randomly to mimic the typographic appearence of European
+                    languages, as are digraphs not to be found in the original.
+
+                    In a professional context it often happens that private or corporate clients corder a publication
+                    to be made and presented with the actual content still not being ready. Think of a news blog that's
+                    filled with content hourly on the day of going live. However, reviewers tend to be distracted by
+                    comprehensible content, say, a random text copied from a newspaper or the internet. The are likely
+                    to focus on the text, disregarding the layout and its elements. Besides, random text risks to be
+                    unintendedly humorous or offensive, an unacceptable risk in corporate environments. Lorem ipsum and
+                    its many variants have been employed since the early 1960ies, and quite likely since the sixteenth
+                    century.Lorem ipsum is a pseudo-Latin text used in web design, typography, layout, and printing in place of
+                    English to emphasise design elements over content. It's also called placeholder (or filler) text.
+                    It's a convenient tool for mock-ups. It helps to outline the visual elements of a document or
+                    presentation, eg typography, font, or layout. Lorem ipsum is mostly a part of a Latin text by the
+                    classical author and philosopher Cicero. Its words and letters have been changed by addition or
+                    removal, so to deliberately render its content nonsensical; it's not genuine, correct, or
+                    comprehensible Latin anymore. While lorem ipsum's still resembles classical Latin, it actually has
+                    no meaning whatsoever. As Cicero's text doesn't contain the letters K, W, or Z, alien to latin,
+                    these, and others are often inserted randomly to mimic the typographic appearence of European
+                    languages, as are digraphs not to be found in the original.
+
+                    In a professional context it often happens that private or corporate clients corder a publication
+                    to be made and presented with the actual content still not being ready. Think of a news blog that's
+                    filled with content hourly on the day of going live. However, reviewers tend to be distracted by
+                    comprehensible content, say, a random text copied from a newspaper or the internet. The are likely
+                    to focus on the text, disregarding the layout and its elements. Besides, random text risks to be
+                    unintendedly humorous or offensive, an unacceptable risk in corporate environments. Lorem ipsum and
+                    its many variants have been employed since the early 1960ies, and quite likely since the sixteenth
+                    century.
+            </div>
+        </div>
+        <div class="slide item5" data-anchor="item5"><h1>5</h1></div>
+        <div class="slide item6" data-anchor="item6"><h1>6</h1></div>
+        <div class="slide item7" data-anchor="item7"><h1>7</h1></div>
 
         <nav class="pagination" id="pagination">
-            <div class="prev-page" onclick="slidePage.prev()"><i class="fa fa-angle-up"></i></div>
-            <a onclick="slidePage.index(1)"></a> <a onclick="slidePage.index(2)"></a> <a onclick="slidePage.index(3)"></a>
-            <a onclick="slidePage.index(4)"></a>
-            <a onclick="slidePage.index(6)"></a> <a onclick="slidePage.index(7)"></a> <a onclick="slidePage.index(8)"></a>
-            <a onclick="slidePage.index(9)"></a>
-            <div class="next-page" onclick="slidePage.next()"><i class="fa fa-angle-down"></i></div>
+
         </nav>
     </div>
 
-    <script type="text/javascript" src="jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="script.js"></script>
-    <script type="text/javascript" src="slick.js"></script>
-    <script type="text/javascript" src="init.js"></script>
+    <script type="text/javascript" src="./assets/js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="./assets/js/nscript.js"></script>
+    <script type="text/javascript" src="./assets/js/init.js"></script>
 </body>
 
 </html>
